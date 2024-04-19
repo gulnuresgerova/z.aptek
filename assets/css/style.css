@@ -1132,3 +1132,141 @@ section:nth-child(even){
   
  
   }  
+
+
+  /* dinamik section start */
+
+  #products {
+    margin-top: 50px;
+  }
+  #products h5 {
+    text-align: center;
+    opacity: 0.5;
+    margin-bottom: 50px;
+  }
+  #products .products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  @media screen and (max-width: 767px) {
+    #products .products {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  #products .products .products-card-one {
+    transition: all 0.5s;
+    position: relative;
+    width: 100%;
+  }
+  #products .products .products-card-one:hover .rg {
+    display: block;
+  }
+  #products .products .products-card-one:hover .mug-btn {
+    opacity: 1;
+    bottom: 60px;
+  }
+  #products .products .products-card-one:hover .icons {
+    opacity: 1;
+    bottom: 70px;
+  }
+  #products .products .products-card-one .image {
+    width: 100%;
+    transition: all 0.5s;
+    overflow: hidden;
+  }
+  #products .products .products-card-one .image img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+  }
+  #products .products .products-card-one .image img:hover {
+    transform: scale(1.2);
+  }
+  #products .products .products-card-one .mug-btn {
+    transition: all 1s;
+    border: none;
+    width: 50%;
+    padding: 10px 20px;
+    background-color: white;
+    position: absolute;
+    left: 25px;
+    bottom: 10px;
+    color: black;
+    text-align: center;
+    opacity: 0;
+  }
+  #products .products .products-card-one .products-text {
+    text-align: center;
+    position: relative;
+  }
+  #products .products .products-card-one .products-text .p-price {
+    opacity: 0.5;
+  }
+  
+  .price {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    text-align: center;
+  }
+  .price .p-price-two {
+    opacity: 0.5;
+  }
+  
+  .icons {
+    transition: all 1s;
+    opacity: 0;
+    position: absolute;
+    bottom: 20px;
+    left: 220px;
+  }
+  @media screen and (max-width: 767px) {
+    .icons {
+      left: 250px;
+    }
+  }
+  .icons i {
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #fff;
+  }
+  .icons a i {
+    color: #fff;
+    margin-left: 5px;
+  }
+  #basket{
+    margin-top: 80px;
+  }
+  
+  .basket-image {
+    width: 20%;
+  }
+  .basket-image img {
+    width: 100%;
+  }
+  
+  table {
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table thead tr th {
+    border: 1px solid black;
+  }
+  table tbody tr td {
+    border: 1px solid black;
+  }
+  table tbody tr td .btn {
+    padding: 10px;
+    border: none;
+    background-color: #B6332D;
+    color: white;
+  }
+  table tbody tr td .inc-btn {
+    padding: 5px;
+    background-color: white;
+    color: #000;
+    border: 1px solid #000;}
+
+  /* dinamik section end */

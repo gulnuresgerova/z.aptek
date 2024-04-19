@@ -6,13 +6,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>complete responsive hospital website create by win coder</title>
-
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="./assets/js/script.js"></script>
+    <title>Zefer aptek</title>
+   
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- custom css file link  -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
 </head>
 <body>
@@ -21,7 +30,7 @@
 
 <header class="header">
 
-    <a href="" class="logo"> <i class="fas fa-heartbeat"></i> <strong>WC</strong>medical </a>
+    <a href="" class="logo"> <i class="fas fa-heartbeat"></i> <strong>Zəfər</strong>Aptek </a>
 
     <nav class="navbar">
         <a href="./index.html">home</a>
@@ -31,8 +40,17 @@
         <a href="./contact.html">Contact</a>
 
         <a href="./form.html">Form</a>
-        <a href="./basket.html">Baket</a>
-        <a href="./favorite.html">Favorite</a>
+
+        <a href="./favorite.html"><i class="fa-solid fa-heart-circle-check"><sup class="fav-count">0</sup></i></a> 
+
+         <a href="./basket.html"
+            >
+            <i class="fa-solid fa-cart-shopping"
+              ><sup class="basket-count">0</sup></i
+            ></a
+          >
+
+         
         
     </nav>
 
@@ -124,51 +142,44 @@
 
 <section class="services" id="services">
 
-    <h1 class="heading"> our <span>services</span> </h1>
+    <h1 class="heading"> our <span>Products</span> </h1>
 
     <div class="box-container">
+        <section class="flowers-pricing" id="pricing">
+            <div class="container">
+              <div class="flowers-pricing-page">
+                <div class="flowers-pricing-top">
+                  <em>Devoted to wonderful beauty</em>
+                  <p class="fs-1">Flowers Pricing</p>
+                </div>
+    
+                <input
+                  type="search"
+                  placeholder="Search"
+                  class="search email footer-input"
+                />
+                <button class="read-more-btn sort">Ascending</button>
+    
+                <div class="favorites">
+                  <!-- <i class="fa-regular fa-heart"></i> -->
+                  <div class="flowers-pricing-cards">
+                    <!-- <div class="pricing-card">
+                      <div class="pricing-image">
+                        <img src="./assets/image/b2.jpg" alt="" />
+                      </div>
+                      <p>Dahlia</p>
+                      <p>$45</p>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="btn-load">
+                  <button class="read-more-btn load">Load more</button>
+                </div>
+              </div>
+            </div>
+          </section>
+    
 
-        <div class="box">
-            <i class="fas fa-notes-medical"></i>
-            <h3>free checkups</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-ambulance"></i>
-            <h3>24/7 ambulance</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-user-md"></i>
-            <h3>expert doctors</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-pills"></i>
-            <h3>medicines</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-procedures"></i>
-            <h3>bed facility</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-heartbeat"></i>
-            <h3>total care</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
 
     </div>
 
@@ -329,61 +340,7 @@
 
 
   <!-- about section end -->
-  <!-- services section starts  -->
-
-<section class="services" id="services">
-
-    <h1 class="heading"> our <span>services</span> </h1>
-
-    <div class="box-container">
-
-        <div class="box">
-            <i class="fas fa-notes-medical"></i>
-            <h3>free checkups</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-ambulance"></i>
-            <h3>24/7 ambulance</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-user-md"></i>
-            <h3>expert doctors</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-pills"></i>
-            <h3>medicines</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-procedures"></i>
-            <h3>bed facility</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-heartbeat"></i>
-            <h3>total care</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- services section ends -->
+  
 <!-- contact us start -->
 <section class="contact" id="contact">
     <h1 class="heading">contact <span>us</span></h1>
@@ -839,7 +796,7 @@
 
 
 <!-- js file link  -->
-<script src="./assets/js/script.js"></script>
+
 
 </body>
 </html>
