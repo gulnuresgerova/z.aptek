@@ -1,145 +1,140 @@
-let menu = document.querySelector('#menu-btn');
-let navbar = document.querySelector('.navbar');
+let menu = document.querySelector("#menu-btn");
+let navbar = document.querySelector(".navbar");
 
-menu.onclick = () =>{
-    menu.classList.toggle('fa-times');
-    navbar.classList.toggle('active');
-}
+menu.onclick = () => {
+  menu.classList.toggle("fa-times");
+  navbar.classList.toggle("active");
+};
 
-window.onscroll = () =>{
-    menu.classList.remove('fa-times');
-    navbar.classList.remove('active');
-}
+window.onscroll = () => {
+  menu.classList.remove("fa-times");
+  navbar.classList.remove("active");
+};
 
-const BASE_URL = " http://localhost:2000/products";
-let flowersCard = document.querySelector(".flowers-pricing-cards");
-let loadMoreBtn = document.querySelector(".load");
+const productsDiv = document.querySelector(".products");
+
+const BASE_URL = " http://localhost:8000/cofee";
 let search = document.querySelector(".search");
 let sort = document.querySelector(".sort");
+// let basketCount = document.querySelector(".basket-count");
+let favsCount = document.querySelector(".fav-count");
+// let basket = getBasketFromLocaleStroge();
 
-let favCount = document.querySelector(".fav-count");
+// calculateCountBasket(basket.length);
+// getBasketCount()
 
-let favorites = getFavoritesFromLocaleStorages();
-calculateFavCount(favorites.length);
-
-let loadCard = [];
-let limit = 3;
-let products = null;
-let productsCopy = null;
+let product = [];
+let dataCopy = [];
+let array = null;
+let arrayCopy = null;
 
 async function getData() {
-  let response = await axios(`${BASE_URL}`);
-  products = response.data;
-  productsCopy = structuredClone(products);
-  console.log(response.data);
-  loadCard = response.data;
-  drawFlowers(response.data);
-  drawFlowers(response.data.slice(0, limit));
+  let res = await axios(`${BASE_URL}`);
+  //   console.log(res.data);
+  product = res.data;
+  array = res.data;
+  let data = res.data;
+  dataCopy = data;
+  arrayCopy = structuredClone(array);
+  drawCooffe(res.data);
 }
+
 getData();
 
-function drawFlowers(data) {
-  flowersCard.innerHTML = "";
+function drawCooffe(data) {
+  productsDiv.innerHTML = "";
   data.forEach((element) => {
-    const pricingCardDiv = document.createElement("div");
-    pricingCardDiv.className = "pricing-card";
-
-    const pricingImageDiv = document.createElement("div");
-    pricingImageDiv.className = "pricing-image";
-
-    const pricingImage = document.createElement("img");
-    pricingImage.src = element.images;
-
-    const pricingName = document.createElement("p");
-    pricingName.textContent = element.name;
-
-    const pricingPrice = document.createElement("p");
-    pricingPrice.textContent = `${element.price}`;
-
-    const readMore = document.createElement("a");
-    readMore.href = `details.html?id=${element.id}`;
-    readMore.innerText = "Read More";
-
-    // FAVORITES
-    const favIconElement = document.createElement("i");
-
-    const bool = favorites.find((item) => item.id == element.id);
-
-    favIconElement.className = !bool
-      ? "fa-regular fa-heart"
-      : "fa-solid fa-heart";
-
-    favIconElement.addEventListener("click", function () {
-      this.className === "fa-regular fa-heart"
-        ? (this.className = "fa-solid fa-heart")
-        : (this.className = "fa-regular fa-heart");
-      let favoriteProducts = getFavoritesFromLocaleStorages();
-
-      const favIndex = favoriteProducts.findIndex(
-        (item) => item.id === element.id
-      );
-
-      if (favIndex === -1) {
-        favoriteProducts.push(element);
-      } else {
-        favoriteProducts.splice(favIndex, 1);
-      }
-
-      setProductToLocaleStorage(favoriteProducts);
-      calculateFavCount(favoriteProducts.length);
-    });
-
-    pricingImageDiv.append(pricingImage, favIconElement);
-    pricingCardDiv.append(pricingImageDiv, readMore, pricingName, pricingPrice);
-    flowersCard.append(pricingCardDiv);
+    productsDiv.innerHTML += `
+      <div class="products-card-one">
+      <div class="image">
+        <img src="${element.image}" alt="" />
+        
+      </div>
+     <div class="yan">
+     <i id="fav" onclick=addToFavs("${element.id}",this) class="fa-solid fa-heart"
+    "></i>
+     
+    <i id="bsg" class="fa-solid fa-cart-shopping" onclick=addToBasket(${
+      element.id
+    },this)></i>
+    
+    </div>
+      <div class="rg">
+      <a href="./details.html?id=${element.id}" class="mug-btn">Read More</a>
+      <div class="icons">
+      <i class="fa-solid fa-trash fa-beat-fade" onclick=deleteBtn(${
+        element.id
+      },this)></i>
+    <a href="../../form.html?id=${
+      element.id
+    }"><i class="fa-solid fa-pen-to-square fa-beat-fade"></i></a>
+      </div>
+  
+      </div>
+      <div class="products-text">
+        <p class="p-title">${element.title}</p>
+       
+        <div class="price">
+      
+                  <p class="p-price-two">${element.price}</p>
+                  </div>
+      </div>
+    </div>
+      `;
   });
 }
-function setProductToLocaleStorage(products) {
-  localStorage.setItem("favs", JSON.stringify(products));
-}
 
-function getFavoritesFromLocaleStorages() {
-  return JSON.parse(localStorage.getItem("favs")) ?? [];
-}
-
-function calculateFavCount(count) {
-  favCount.textContent = count;
-}
-
-// LOADMORE
-loadMoreBtn.addEventListener("click", function () {
-  limit += 3;
-  if (limit >= loadCard.length) {
-    this.remove();
+async function deleteBtn(id, btn) {
+  if (confirm("silmeye eminsen")) {
+    await axios.delete(`${BASE_URL}/${id}`);
   }
-  drawFlowers(loadCard.slice(0, limit));
-});
+  btn.closest(".products").remove;
+}
+
+let basket = getdataFromLocaleBasket();
+
+function addToBasket(id) {
+  console.log("ss");
+  let product = dataCopy.find((item) => item.id == id);
+  let index = basket.findIndex((item) => item.product.id === id);
+  console.log(index);
+  if (index === -1) {
+    basket.push({ count: 1, product: product });
+  } else {
+    basket[index].count++;
+  }
+  setDataTOLocaleBasket(basket);
+}
+function setDataTOLocaleBasket(basket) {
+  localStorage.setItem("basket", JSON.stringify(basket));
+}
+
+function getdataFromLocaleBasket() {
+  return JSON.parse(localStorage.getItem("basket")) || [];
+}
 
 search.addEventListener("input", function (element) {
-  let filtered = products.filter((item) => {
-    return item.name
+  let filtered = array.filter((item) => {
+    return item.title
       .toLocaleLowerCase()
       .includes(element.target.value.toLocaleLowerCase());
   });
-  drawFlowers(filtered);
+  drawCooffe(filtered);
   console.log(filtered);
 });
 
 sort.addEventListener("click", function () {
   let sorted;
   if (this.innerText == "Ascending") {
-    sorted = products.sort((a, b) => a.name.localeCompare(b.name));
+    sorted = array.sort((a, b) => a.title.localeCompare(b.title));
     this.innerText = "Descending";
   } else if (this.innerText == "Descending") {
-    sorted = products.sort((a, b) => b.name.localeCompare(a.name));
+    sorted = array.sort((a, b) => b.title.localeCompare(a.title));
     this.innerText = "Default";
   } else {
     this.innerText = "Ascending";
-    sorted = productsCopy;
+    sorted = arrayCopy;
   }
-  drawFlowers(sorted);
+  drawCooffe(sorted);
 });
-
-
-
 

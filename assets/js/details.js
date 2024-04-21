@@ -1,45 +1,43 @@
 let id = new URLSearchParams(window.location.search).get("id");
-let details = document.querySelector(".details");
-let detailsBtn = document.querySelector(".detailsBtn");
-const BASE_URL = "http://localhost:2000/products";
 
-async function getData() {
-  let response = await axios(`${BASE_URL}/${id}`);
-  console.log(response.data);
- 
-  details.innerHTML = `
-          
-          <div class="card">
-          <div class="card-body">
+console.log(id);
+const details = document.querySelector(".details");
+const goback = document.querySelector(".goback");
+const BASE_URL = " http://localhost:8000/cofee";
+
+fetch(`${BASE_URL}/${id}`)
+  .then((res) => res.json())
+  .then((el) => {
+    details.innerHTML = `
+    <div class="box">
+    <div class="box-img"><img src="${el.image}" alt=""></div>
+    <div class="box-body">
+        <p class="title">${el.title} <br> <br>  
+        Ilfo: <br>
+        promotes calcium absorption in the gut and maintains adequate serum calcium and phosphate concentrations to enable normal bone mineralization and to prevent hypocalcemic tetany</p>
        
-          <img src="${response.data.images}" alt="">
-          
-      
-  <div class="det-text">
-  
-  <h3 class="card-title">  Name: ${response.data.name}</h3>
-  <p>${response.data.price}</p>
+    </div>
+    <div class="box-price">
+        <p>$${el.price}</p>
+    </div>
+</div>
+    
+    `;
+  });
 
-  <p class="text"> <p style="font-size:20px; font-weight: 700;">Additional Information:</p> 
-  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor accusamus eos facere asperiores. Dolorum, a. Voluptatum delectus debitis doloribus odit tempore, nesciunt explicabo eum dolore!
-</p>
-  
-  </div>
-            
-          
-          </div>
-        </div>
-          
-          
-          `;
-}
-getData();
-
-// function drawCards(data) {
-//   details.innerHTML = "";
-
-// }
-
-detailsBtn.addEventListener("click", function () {
+goback.addEventListener("click", function () {
   window.history.back();
 });
+
+let menu = document.querySelector("#menu-btn");
+let navbar = document.querySelector(".navbar");
+
+menu.onclick = () => {
+  menu.classList.toggle("fa-times");
+  navbar.classList.toggle("active");
+};
+
+window.onscroll = () => {
+  menu.classList.remove("fa-times");
+  navbar.classList.remove("active");
+};

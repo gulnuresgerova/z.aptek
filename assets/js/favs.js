@@ -1,66 +1,85 @@
-const BASE_URL = " http://localhost:2000/products";
-let flowersCard = document.querySelector(".flowers-pricing-cards");
-let favCount = document.querySelector(".fav-count");
+const BASE_URL = " http://localhost:8000/cofee";
+const productsDiv = document.querySelector(".products");
+const favCount = document.querySelector(".fav-count");
 
 
-let favorites = getFavoritesFromLocaleStorages();
-calculateFavCount(favorites.length);
-drawFlowers(favorites)
 
-function drawFlowers(data) {
-    flowersCard.innerHTML = "";
+let favProduct = getFavaFromLocaleStrogeProduct();
+calculateCount(favProduct.length);
+
+
+
+function drawCooffe(data) {
+    productsDiv.innerHTML = "";
     data.forEach((element) => {
-      const pricingCardDiv = document.createElement("div");
-      pricingCardDiv.className = "pricing-card";
+      productsDiv.innerHTML += `
+      <div class="products-card-one">
+      <div class="image">
+        <img src="${element.image}" alt="" />
+        
+      </div>
+      <i class="${
+        favProduct.some((item) => item.id === element.id)
+          ? "fa-solid fa-heart "
+          : "fa-regular fa-heart"
+      }" onclick=favIcon(${element.id},this)></i>
+      <i class="fa-solid fa-cart-shopping"></i>
+      <div class="rg">
+      <a href="#" class="mug-btn">EXPLORE MUG</a>
+      <div class="icons">
+      <i class="fa-solid fa-trash fa-beat-fade" onclick=deleteBtn(${
+        element.id
+      },this)></i>
+    <a href="../../form.html?id=${
+      element.id
+    }"><i class="fa-solid fa-pen-to-square fa-beat-fade"></i></a>
+      </div>
   
-      const pricingImageDiv = document.createElement("div");
-      pricingImageDiv.className = "pricing-image";
-  
-      const pricingImage = document.createElement("img");
-      pricingImage.src = element.images;
-  
-      const pricingName = document.createElement("p");
-      pricingName.textContent = element.name;
-  
-      const pricingPrice = document.createElement("p");
-      pricingPrice.textContent = `${element.price}`;
-  
-      const readMore = document.createElement("a");
-      readMore.href = `details.html?id=${element.id}`;
-      readMore.innerText = "Read More";
-  
-      // FAVORITES
-      const favIconElement = document.createElement("i");
-      favIconElement.className = "fa-solid fa-heart";
-    
- 
-  
-      favIconElement.addEventListener("click", function () {
-        favorites = favorites.filter((item) => item.id !== element.id);
-        setProductToLocaleStorage(favorites);
-        pricingCardDiv.remove();
-        let favoriteProducts = getFavoritesFromLocaleStorages();
-
-  
-        setProductToLocaleStorage(favoriteProducts);
-        calculateFavCount(favoriteProducts.length);
-      });
-  
-      pricingImageDiv.append(pricingImage, favIconElement);
-      pricingCardDiv.append(pricingImageDiv, readMore, pricingName, pricingPrice);
-      flowersCard.append(pricingCardDiv);
+      </div>
+      <div class="products-text">
+        <p class="p-title">${element.title}</p>
+       
+        <div class="price">
+      
+                  <p class="p-price-two">${element.price}</p>
+                  </div>
+      </div>
+    </div>
+      `;
     });
   }
+drawCooffe(favProduct)
 
 
-  function setProductToLocaleStorage(products) {
-    localStorage.setItem("favs", JSON.stringify(products));
+  function favIcon(id,icon){
+favProduct=favProduct.filter((item)=>item.id !== id)
+setFavaFromLocaleStrogeProduct(favProduct)
+calculateCount(favProduct.length)
+
+icon.closest(".products-card-one").remove()
   }
-  
-  function getFavoritesFromLocaleStorages() {
-    return JSON.parse(localStorage.getItem("favs")) ?? [];
+
+function calculateCount(count){
+    favCount.textContent=count
+}
+
+  function setFavaFromLocaleStrogeProduct(fav){
+    localStorage.setItem("favs", JSON.stringify(fav))
   }
-  
-  function calculateFavCount(count) {
-    favCount.textContent = count;
+  function getFavaFromLocaleStrogeProduct(){
+    return JSON.parse(localStorage.getItem("favs")) || []
+
   }
+
+  let menu = document.querySelector("#menu-btn");
+let navbar = document.querySelector(".navbar");
+
+menu.onclick = () => {
+  menu.classList.toggle("fa-times");
+  navbar.classList.toggle("active");
+};
+
+window.onscroll = () => {
+  menu.classList.remove("fa-times");
+  navbar.classList.remove("active");
+};
