@@ -1463,6 +1463,9 @@ section:nth-child(even){
   @media screen and (max-width: 767px) {
     #details .details .box {
       width: 100%;
+      flex-direction: column;
+      gap: 10px;
+      row-gap: 10px;
     }
   }
   
